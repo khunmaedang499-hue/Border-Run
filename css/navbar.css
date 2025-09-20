@@ -1,0 +1,114 @@
+/* --- Navbar --- */
+.navbar {
+  background: var(--surface); 
+  box-shadow: 0 2px 4px rgba(0,0,0,.08);
+  border-bottom: 1px solid rgba(0,0,0,0.25);
+}
+.navbar__inner {
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 2px 0;
+  gap: 16px;
+}
+.brand img {
+  height: 50px; 
+  width: auto;
+}
+.menu {
+  display: flex; 
+  align-items: center; 
+  gap: 32px;
+}
+.menu__link {
+  color: var(--brand-navy); 
+  font-weight: 600; 
+  padding: 10px 0; 
+  position: relative;
+}
+.menu__link.active { 
+  color: var(--brand-pink);
+}
+
+/* --- Hamburger button (hidden on desktop) --- */
+.hamburger {
+  display: none;
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  position: relative;
+}
+.hamburger__bar, 
+.hamburger__bar::before, 
+.hamburger__bar::after {
+  position: absolute; 
+  left: 50%; 
+  transform: translateX(-50%);
+  width: 22px; height: 2px; 
+  background: #1f3343; 
+  border-radius: 2px; 
+  content: "";
+}
+.hamburger__bar { 
+  top: 50%; 
+  transform: translate(-50%,-50%);
+}
+.hamburger__bar::before { 
+  top: -7px; 
+  content: "";
+}
+.hamburger__bar::after { 
+  top: 7px; 
+  content: "";
+}
+/* X state */
+.hamburger.is-active .hamburger__bar {
+  background: transparent;
+}
+.hamburger.is-active .hamburger__bar::before {
+  transform: translate(-50%,0) rotate(45deg); 
+  top: 0;
+}
+.hamburger.is-active .hamburger__bar::after {
+  transform: translate(-50%,0) rotate(-45deg); 
+  top: 0;
+}
+
+/* --- Responsive (เฉพาะ Navbar) --- */
+@media (max-width: 1024px) {
+  .menu { gap: 20px; }
+}
+
+@media (max-width: 900px) {
+  .brand img { height: 72px; }
+  .hamburger { display: inline-block; }
+
+  /* turn menu into dropdown */
+  .menu {
+    position: absolute;
+    left: 0; right: 0; top: 100%;
+    background: #ffffff;
+    border-top: 1px solid var(--border);
+    box-shadow: 0 12px 30px rgba(64,64,84,.08);
+    display: none; /* hidden by default */
+    flex-direction: column;
+    gap: 0;
+    padding: 8px 0;
+    z-index: 50;
+  }
+  .navbar { 
+    position: sticky; 
+    top: 0; 
+    z-index: 40; 
+  }
+  .navbar__inner { position: relative; }
+  .menu.is-open { display: flex; }
+  .menu__link {
+    padding: 14px 24px;
+    width: 100%;
+    color: #1f3343;
+  }
+}
